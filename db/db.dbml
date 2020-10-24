@@ -13,7 +13,7 @@ Table classes {
 
 Table rooms {
   id int [pk]
-  uuid int 
+  uuid string
   class_id int [ref: > classes.id]
   is_main_room boolen [note: "大本の部屋かどうか"]
   Note: "一対一のルームの情報も入る"
@@ -24,11 +24,11 @@ Table room_messages {
   room_id int [not null, ref: > rooms.id]
   user_id int [not null, ref: > users.id]
   message text
-  image longint 
+  image string
   send_at datetime
 }
 
-Table users_rooms {
+Table user_rooms {
   id int [pk]
   user_id int [not null, ref: > users.id]
   room_id int [not null, ref: > rooms.id]
@@ -36,7 +36,7 @@ Table users_rooms {
 
 Table users {
   id int [pk]
-  uuid int 
+  uuid string
   name string
   last_used_at datetime [note: "user削除できる用"]
   Note: "ルームに入ったら適当に作成"
