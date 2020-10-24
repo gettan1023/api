@@ -1,0 +1,49 @@
+Table classes {
+  id int [pk]
+  university_id int [ref: - universities.id]
+  name string [not null]
+  day enum [note: "曜日 Rails で enum を作る"]
+  period enum [note: "時限 Rails で enum を作る"]
+  teacher_name string 
+  date date [not null, note: "何回目の講義か特定するため"]
+  close_date datetime [not null]
+  admin_user_id int [ref: - users.id]
+  is_closed boolen [default: false]
+}
+
+Table rooms {
+  id int [pk]
+  uuid int 
+  class_id int [ref: > classes.id]
+  is_main_room boolen [note: "大本の部屋かどうか"]
+  Note: "一対一のルームの情報も入る"
+}
+
+Table room_messages {
+  id int [pk]
+  room_id int [not null, ref: > rooms.id]
+  user_id int [not null, ref: > users.id]
+  message text
+  image longint 
+  send_at datetime
+}
+
+Table users_rooms {
+  id int [pk]
+  user_id int [not null, ref: > users.id]
+  room_id int [not null, ref: > rooms.id]
+}
+
+Table users {
+  id int [pk]
+  uuid int 
+  name string
+  last_used_at datetime [note: "user削除できる用"]
+  Note: "ルームに入ったら適当に作成"
+}
+
+Table universities {
+  id int [pk]
+  name string 
+  name_kana string
+}
