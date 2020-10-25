@@ -1,4 +1,4 @@
-Table classes {
+Table jugyos {
   id int [pk]
   university_id int [ref: - universities.id]
   name string [not null]
@@ -6,16 +6,16 @@ Table classes {
   period enum [note: "時限 Rails で enum を作る"]
   teacher_name string 
   date date [not null, note: "何回目の講義か特定するため"]
-  close_date datetime [not null]
+  closing_date datetime [not null]
   admin_user_id int [ref: - users.id]
   is_closed boolen [default: false]
 }
 
 Table rooms {
   id int [pk]
-  uuid string
-  class_id int [ref: > classes.id]
-  is_main_room boolen [note: "大本の部屋かどうか"]
+  uuid string [not null]
+  jugyo_id int [ref: > jugyos.id]
+  is_main_room boolen [not null, note: "大本の部屋かどうか"]
   Note: "一対一のルームの情報も入る"
 }
 
@@ -36,7 +36,7 @@ Table user_rooms {
 
 Table users {
   id int [pk]
-  uuid string
+  uuid string [not null]
   name string
   last_used_at datetime [note: "user削除できる用"]
   Note: "ルームに入ったら適当に作成"
