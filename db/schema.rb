@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_27_052517) do
+ActiveRecord::Schema.define(version: 2020_10_28_012219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,14 +57,7 @@ ActiveRecord::Schema.define(version: 2020_10_27_052517) do
     t.string "name_kana"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "university_colors", force: :cascade do |t|
-    t.bigint "university_id", null: false
-    t.string "color_code"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["university_id"], name: "index_university_colors_on_university_id"
+    t.string "color"
   end
 
   create_table "user_rooms", force: :cascade do |t|
@@ -89,7 +82,6 @@ ActiveRecord::Schema.define(version: 2020_10_27_052517) do
   add_foreign_key "room_messages", "rooms"
   add_foreign_key "room_messages", "users"
   add_foreign_key "rooms", "jugyos"
-  add_foreign_key "university_colors", "universities"
   add_foreign_key "user_rooms", "rooms"
   add_foreign_key "user_rooms", "users"
 end
