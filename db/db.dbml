@@ -3,7 +3,7 @@ Table jugyos {
   university_id int [ref: - universities.id]
   name string [not null]
   day enum [note: "曜日 Rails で enum を作る"]
-  period enum [note: "時限 Rails で enum を作る"]
+  period int
   teacher_name string 
   date date [not null, note: "何回目の講義か特定するため"]
   closing_date datetime [not null]
@@ -46,4 +46,5 @@ Table universities {
   id int [pk]
   name string 
   name_kana string
+  color string
 }
