@@ -20,9 +20,19 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - redis
     environment:
       - RAILS_ENV=development
-    #   - REDIS_URL=redis://redis:6379
-    #   - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
+      - REDIS_URL=redis://redis:6379
     tty: true
     stdin_open: true
+
+  redis:
+    image: redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - api-redis:/var/lib/redis/data
+      
+volumes:
+  api-redis:
