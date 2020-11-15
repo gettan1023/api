@@ -4,7 +4,7 @@ module Api
 
       def index
         universities = University.all
-        render json: universities
+        render json: { universities: universities }
       end
     end
   end
