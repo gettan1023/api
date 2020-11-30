@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :jugyos, only: [:create]
       resources :universities, only: [:index]
       resources :users, only: [:create]
+      get 'rooms/:uuid' => 'rooms#show'
     end
   end
 end

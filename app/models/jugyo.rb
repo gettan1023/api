@@ -10,5 +10,7 @@ class Jugyo < ApplicationRecord
     "金": 5,
     "土": 6
   }
+  
+  scope :not_closed, -> { where(is_closed: false) }
 
 end
