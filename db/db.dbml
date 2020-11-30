@@ -19,7 +19,7 @@ Table rooms {
   Note: "一対一のルームの情報も入る"
 }
 
-Table room_messages {
+Table user_room_messages {
   id int [pk]
   room_id int [not null, ref: > rooms.id]
   user_id int [not null, ref: > users.id]

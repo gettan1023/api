@@ -31,18 +31,6 @@ ActiveRecord::Schema.define(version: 2020_10_28_012219) do
     t.index ["university_id"], name: "index_jugyos_on_university_id"
   end
 
-  create_table "room_messages", force: :cascade do |t|
-    t.bigint "room_id", null: false
-    t.bigint "user_id", null: false
-    t.text "message"
-    t.string "image"
-    t.datetime "send_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["room_id"], name: "index_room_messages_on_room_id"
-    t.index ["user_id"], name: "index_room_messages_on_user_id"
-  end
-
   create_table "rooms", force: :cascade do |t|
     t.string "uuid", null: false
     t.bigint "jugyo_id", null: false
@@ -58,6 +46,18 @@ ActiveRecord::Schema.define(version: 2020_10_28_012219) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "color"
+  end
+
+  create_table "user_room_messages", force: :cascade do |t|
+    t.bigint "room_id", null: false
+    t.bigint "user_id", null: false
+    t.text "message"
+    t.string "image"
+    t.datetime "send_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_user_room_messages_on_room_id"
+    t.index ["user_id"], name: "index_user_room_messages_on_user_id"
   end
 
   create_table "user_rooms", force: :cascade do |t|
@@ -79,9 +79,9 @@ ActiveRecord::Schema.define(version: 2020_10_28_012219) do
 
   add_foreign_key "jugyos", "universities"
   add_foreign_key "jugyos", "users", column: "admin_user_id"
-  add_foreign_key "room_messages", "rooms"
-  add_foreign_key "room_messages", "users"
   add_foreign_key "rooms", "jugyos"
+  add_foreign_key "user_room_messages", "rooms"
+  add_foreign_key "user_room_messages", "users"
   add_foreign_key "user_rooms", "rooms"
   add_foreign_key "user_rooms", "users"
 end
