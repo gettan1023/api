@@ -2,6 +2,15 @@ module Api
   module V1
     class JugyosController < ApplicationController
 
+      def index
+        jugyos = Jugyo.where(is_closed: false)
+        if jugyos.empty?
+          render json: {}
+        else
+          render json: {jugyos: jugyos}
+        end
+      end
+
       def create
         jugyo = Jugyo.new(jugyo_params)
         if jugyo.save
