@@ -7,16 +7,17 @@ module Api
         if jugyos.empty?
           render json: {}
         else
-          render json: {jugyos: jugyos}, include: [:rooms]
+          render json: { jugyos: jugyos }, include: [:rooms]
         end
       end
 
       def create
         jugyo = Jugyo.new(jugyo_params)
         if jugyo.save
-          render json: {jugyo: jugyo}
+          room = Room.create(jugyo_id: jugyo.id, is_main_room: true)
+          render json: { jugyo: jugyo, room: room }
         else
-          render json: {jugyo: jugyo.errors}
+          render json: { jugyo: jugyo.errors }
         end
       end
 
