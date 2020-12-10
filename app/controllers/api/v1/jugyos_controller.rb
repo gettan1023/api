@@ -3,11 +3,11 @@ module Api
     class JugyosController < ApplicationController
 
       def index
-        jugyos = Jugyo.where(is_closed: false)
+        jugyos = Jugyo.includes(:rooms).where(is_closed: false)
         if jugyos.empty?
           render json: {}
         else
-          render json: {jugyos: jugyos}
+          render json: {jugyos: jugyos}, include: [:rooms]
         end
       end
 

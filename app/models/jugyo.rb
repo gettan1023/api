@@ -1,5 +1,6 @@
 class Jugyo < ApplicationRecord
   belongs_to :university
+  has_many :rooms
 
   enum day: {
     "日": 0,
