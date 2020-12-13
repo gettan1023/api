@@ -24,6 +24,11 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
+  # actioncable周りの設定
+  config.action_cable.mount_path = '/cable'
+  # config.action_cable.url = 'wss://localhost:3000/cable'
+  # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
+  config.action_cable.disable_request_forgery_protection = true
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
